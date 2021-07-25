@@ -1,2 +1,2 @@
-/target/
-.how_to_run.txt
+how_to_run.txt
+target/classes/*
