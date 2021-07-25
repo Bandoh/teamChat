@@ -1,5 +1,6 @@
 # Welcome to TeamChat!
-##INTRODUCTION
+
+## INTRODUCTION
 A simple JavaFX program that allows voice chat
 >Minimal
 #### Todo
