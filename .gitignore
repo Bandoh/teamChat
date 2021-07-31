@@ -1,2 +1,5 @@
 target/*
 how_to_run.txt
+src/main/java/tv_dependencies/*.class
+src/main/java/tv_dependencies/mysock/*.class
+src/main/java/tv_dependencies/threads/*.class
