@@ -1,7 +1,9 @@
 package mysock;
-import java.io.*;
+import java.io.DataOutputStream;
+import java.io.DataInputStream;
 import java.net.*;
 import java.util.*;
+import threads.ClientListenerHandler;
 
 public class SockClient{
     Socket sock;
@@ -19,6 +21,11 @@ public class SockClient{
         
         try {
             DataOutputStream dout=new DataOutputStream(this.sock.getOutputStream());  
+            Thread listenerThread = new ClientListenerHandler(new DataInputStream(this.sock.getInputStream()));
+
+            listenerThread.start();
+
+
             System.out.println("Client Starting");
             while(!(c.equals("end"))){       
                 c = ip.nextLine();   

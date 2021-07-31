@@ -1,13 +1,15 @@
-package mysock;
+package threads;
 import java.net.*;
 import java.io.*;
 public class ClientHandler extends Thread{
     Socket s;
     DataInputStream dis;
+    private int id;
 
-    public ClientHandler(Socket s, DataInputStream dis){
+    public ClientHandler(Socket s, DataInputStream dis,int count){
         this.s = s;
         this.dis = dis;
+        this.id = count;
     }
 
 
@@ -16,7 +18,7 @@ public class ClientHandler extends Thread{
         while(true){
             try {  
             str= this.dis.readUTF(); 
-            System.out.println("message = "+str); 
+            System.out.println(this.id+" says: "+str); 
             } catch (Exception e) {
                 //TODO: handle exception
                 try {

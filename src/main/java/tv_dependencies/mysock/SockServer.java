@@ -1,8 +1,12 @@
 package mysock;
 import java.net.*;
-import java.io.*;
+import java.io.DataOutputStream;
+import java.io.DataInputStream;
+import threads.ClientHandler;
 public class SockServer{
     ServerSocket sock;
+    Socket client_list[]  = new Socket[20]; 
+    private int count = 0;
 
     public SockServer(int port){
         try{
@@ -19,8 +23,9 @@ public class SockServer{
             try {
                 System.out.println("Server Starting");      
                 Socket client_socket = acceptConn();
+                System.out.println(client_socket);
                 DataInputStream client_inputStream = new DataInputStream(client_socket.getInputStream());
-                Thread t1 = new ClientHandler(client_socket,client_inputStream);
+                Thread t1 = new ClientHandler(client_socket,client_inputStream,this.count);
     
                 t1.start();
             } catch (Exception e) {
@@ -34,12 +39,27 @@ public class SockServer{
         System.out.println("Awaiting Connection");
         try {
               s = this.sock.accept();
-             System.out.println("Accepted Connection");
+              client_list[count] = s;
+              this.count++;
+              this.broadcast("new_client");
+             System.out.println("Accepted Connection "+ count);
              return s;
         } catch (Exception e) {
             //TODO: handle exception
             System.out.println(e);
             return s;
+        }
+    }
+
+
+    private void broadcast(String message){
+        for(int i=0;i<=this.count;i++){          
+            try {
+                DataOutputStream client_outputStream = new DataOutputStream(this.client_list[i].getOutputStream());
+                client_outputStream.writeUTF(message );
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
 
