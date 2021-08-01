@@ -21,7 +21,7 @@ public class SockClient{
         
         try {
             DataOutputStream dout=new DataOutputStream(this.sock.getOutputStream());  
-            Thread listenerThread = new ClientListenerHandler(new DataInputStream(this.sock.getInputStream()));
+            Thread listenerThread = new ClientListenerHandler(this.sock,new DataInputStream(this.sock.getInputStream()));
 
             listenerThread.start();
 

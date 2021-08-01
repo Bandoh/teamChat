@@ -20,8 +20,9 @@ public class TeamVoice extends Application {
         stage.setTitle("TeamVoice");
         stage.setScene(scene);
         stage.show();
+        SockClient s = new SockClient(this.host,this.port);
         Runnable r = ()->{
-            SockClient s = new SockClient(this.host,this.port);
+            
             s.begin();
         };
         Thread t1  =new Thread(r);

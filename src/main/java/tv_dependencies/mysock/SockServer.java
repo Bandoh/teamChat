@@ -41,7 +41,7 @@ public class SockServer{
               s = this.sock.accept();
               client_list[count] = s;
               this.count++;
-              this.broadcast("new_client");
+              this.broadcast(ServerMessage.NEW_CLIENT);
              System.out.println("Accepted Connection "+ count);
              return s;
         } catch (Exception e) {
@@ -52,11 +52,11 @@ public class SockServer{
     }
 
 
-    private void broadcast(String message){
+    private void broadcast(ServerMessage message){
         for(int i=0;i<=this.count;i++){          
             try {
                 DataOutputStream client_outputStream = new DataOutputStream(this.client_list[i].getOutputStream());
-                client_outputStream.writeUTF(message );
+                client_outputStream.writeUTF(message.name() );
             } catch (Exception e) {
                 System.out.println(e);
             }

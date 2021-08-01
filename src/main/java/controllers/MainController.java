@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import mysock.SockClient;
 import javafx.concurrent.Task;
+import mysock.GlobalValues;
 
 public class MainController{
 
@@ -19,7 +20,7 @@ private Button someThing;
 
     public void clickUP(ActionEvent e){
         System.out.println(someThing.getText());
-        System.out.println("WORKING");
+        System.out.println(GlobalValues.getServerMessage());
       
     }
 
